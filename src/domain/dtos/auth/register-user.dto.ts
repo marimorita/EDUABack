@@ -1,4 +1,4 @@
-import { Validator } from "../../../presentation/config";
+import { Validator } from "../../../config";
 
 export class RegisterUserDto {
     private constructor(
