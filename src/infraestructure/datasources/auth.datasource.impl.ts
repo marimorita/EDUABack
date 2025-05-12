@@ -1,4 +1,4 @@
-import { AuthDataSource, CustomError, RegisterUserDto, UserEntity } from "../../domain";
+import { AuthDataSource, CustomError, RegisterUserDto } from "../../domain";
 
 export class AuthDataSourceImpl implements AuthDataSource {
     async register(registerUserDto: RegisterUserDto): Promise<UserEntity>{
