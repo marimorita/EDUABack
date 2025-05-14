@@ -1,6 +1,6 @@
 import { Entity } from 'typeorm';
-import { CustomError } from '../../domain';
-import { ReceptionistEntity } from '../../Data';
+import { CustomError } from '../../../domain';
+import { ReceptionistEntity } from '../../../Data';
 
 export class ReceptionistMapper {
     public static toDomain(object: any): ReceptionistEntity {
