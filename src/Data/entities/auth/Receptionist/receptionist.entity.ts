@@ -17,6 +17,6 @@ export class ReceptionistEntity {
     password?: string;  
     @Column({name : 'rol'})
     role?: string;
-    @Column({name : 'imagen'})
+    @Column({name : 'img'})
     img?: string;      
 }

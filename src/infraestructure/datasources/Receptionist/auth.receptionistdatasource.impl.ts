@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
-import { AuthReceptionistDataSource, CustomError, RegisterReceptionistDto } from "../../domain";
-import { AppDataSource } from "../../Data/MySQL/OrmConfig"
-import { ReceptionistEntity } from "../../Data";
-import { ReceptionistMapper } from "../mappers/Receptionist/receptionist.mapper";
+import { AuthReceptionistDataSource, CustomError, RegisterReceptionistDto } from "../../../domain";
+import { AppDataSource } from "../../../Data/MySQL/OrmConfig"
+import { ReceptionistEntity } from "../../../Data";
+import { ReceptionistMapper } from "../../mappers/Receptionist/receptionist.mapper";
 import { log } from "node:console";
 
 export class AuthReceptionistDataSourceImpl implements AuthReceptionistDataSource {

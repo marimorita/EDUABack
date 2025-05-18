@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { AuthRoutes } from './auth/routes'
+import { AuthReceptionistRoutes } from "./auth/Receptionist/receptionist.routes";
 
 export class AppRoutes {
     static get routes(): Router {
 
         const router = Router();
-        router.use('/api/auth', AuthRoutes.routes)
+        router.use('/edua-at/auth/receptionist', AuthReceptionistRoutes.routes)
         return router;
     }
 }
