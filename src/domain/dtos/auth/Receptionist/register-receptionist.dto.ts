@@ -1,4 +1,4 @@
-import { Validator } from "../../../config";
+import { Validator } from "../../../../config";
 
 export class RegisterReceptionistDto {
     private constructor(
@@ -48,6 +48,30 @@ export class RegisterReceptionistDto {
         return [
             undefined,
             new RegisterReceptionistDto(id, name, post, lastNames, email, password, cel, role, img)
+        ]
+    }
+}
+
+export class LoginReceptionistDto {
+    private constructor(
+        public email: string,
+        public password: string
+    ){}
+
+    static create(object: { [key: string]: any; }): [string?, LoginReceptionistDto?] {
+        const { email, password } = object
+
+        if (!email && !password) return ['Faltan el correo y contraseña'];
+
+        if (!email) return ['Falta el correo'];
+        if (!Validator.email.test(email)) return ['Correo invalido'];
+
+        if (!password) return ['Falta la contraseña'];
+        if (password.length < 6) return ['Contraseña muy corta'];
+
+        return [
+            undefined,
+            new LoginReceptionistDto(email, password)
         ]
     }
 }

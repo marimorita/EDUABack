@@ -1,20 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2017",                           // Versión de JS generada (ES6+)
-    "module": "commonjs",                         // Usado por Node.js
-    "rootDir": "src",                             // Carpeta donde está el código fuente
-    "outDir": "dist",                             // Carpeta donde se compila
-    "strict": true,                               // Activa verificación estricta de tipos
-    "esModuleInterop": true,                      // Importación de módulos CommonJS
-    "skipLibCheck": true,                         // Ignora revisión de archivos .d.ts
-    "forceConsistentCasingInFileNames": true,     // Evita errores de mayúsculas/minúsculas en imports
-    "experimentalDecorators": true,               // Habilita decoradores (necesario para TypeORM)
-    "emitDecoratorMetadata": true,                // Emite metadata para decoradores
-    "moduleResolution": "node",                   // Resolución de módulos al estilo Node.js
-    "resolveJsonModule": true,                    // Permite importar archivos JSON
-    "allowSyntheticDefaultImports": true,         // Permite imports con `import x from`
-    "useDefineForClassFields": false              // Compatible con TypeORM para campos de clase
-  },
-  "include": ["src/**/*"],                        // Archivos a compilar
-  "exclude": ["node_modules", "dist"]             // Archivos/directorios excluidos
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
 }
