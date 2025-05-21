@@ -2,6 +2,6 @@ import { LoginReceptionistDto, RegisterReceptionistDto } from "../../dtos/auth/R
 
 RegisterReceptionistDto
 export abstract class AuthReceptionistRepository {
-    abstract register (registerReceptionistDto:RegisterReceptionistDto): Promise<{message : string}> 
-    abstract login (loginReceptionistDto:LoginReceptionistDto): Promise<{token: string, role: string | undefined, message: string}>
+    abstract register(registerReceptionistDto: RegisterReceptionistDto): Promise<{ message: string }>
+    abstract login(loginReceptionistDto: LoginReceptionistDto): Promise<{ token: string, role: string | undefined, message: string }>
 };

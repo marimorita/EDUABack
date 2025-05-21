@@ -8,11 +8,14 @@ import path from 'path';
 import HandleBars from 'handlebars';
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: envs.GMAIL_USER,
-        pass: envs.GMAIL_PASS,
-    },                                         
+  service: 'gmail',
+  auth: {
+    user: envs.GMAIL_USER,
+    pass: envs.GMAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false, 
+  },
 });
  
 const getHtmlTemplate = (code: string, templateName: string = 'Page.html') => {
