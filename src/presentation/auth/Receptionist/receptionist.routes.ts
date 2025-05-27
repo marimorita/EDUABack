@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AuthReceptionistController } from "./receptionist.controller";
-import { AuthReceptionistDataSourceImpl, AuthReceptionistRepositoryImpl } from "../../../infraestructure";
+import { AuthReceptionistRepositoryImpl } from "../../../infraestructure";
+import { AuthReceptionistDataSourceImpl } from "../../../infraestructure/datasources/Receptionist/auth.receptionist.datasource.impl";
 
 export class AuthReceptionistRoutes {
     static get routes(): Router {
