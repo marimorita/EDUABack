@@ -8,7 +8,7 @@ export const envs = {
     DB_USERNAME: get('DB_USERNAME').required().asString(),
     DB_PASSWORD: get('DB_PASSWORD').required().asString(),
     DB_DATABASE: get('DB_DATABASE').required().asString(),
-    GMAIL_USER: get('DB_DATABASE').required().asString(),
-    GMAIL_PASS: get('DB_DATABASE').required().asString(),
+    GMAIL_USER: get('GMAIL_USER').required().asString(),
+    GMAIL_PASS: get('GMAIL_PASS').required().asString(),
     JWT_SECRET: get('JWT_SECRET').required().asString(),
 }
