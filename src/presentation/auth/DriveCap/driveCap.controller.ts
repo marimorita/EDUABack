@@ -1,7 +1,3 @@
-import jwt from "jsonwebtoken";
-import crypto from 'crypto';
-import { envs } from '../../../config/'
-import { DriveCapEntity } from "../../../Data";
 import { Request, Response } from 'express';
 import { AuthDriveCapRepository, CustomError, RegisterDriveCapDto } from '../../../domain';
 
@@ -26,6 +22,38 @@ export class AuthDriveCapController {
             res.status(201).json({ message: 'captura drive registradas correctamente' })
         } catch (error) {
             console.error("error h", error);
+            this.handleError(error, res);
+        }
+    }
+    getAllDriveCap = async (req: Request, res: Response) => {
+        try {
+            const notifications = await this.authDriveCapRepository.getAllDriveCap();
+            res.json(notifications);
+        } catch (error) {
+            console.log(error);
+            this.handleError(error, res);
+        }
+    }
+
+    getDriveCapByDate = async (req: Request, res: Response) => {
+        const { date } = req.params;
+        const parsedDate = new Date(date);
+
+        try {
+            const driveCap = await this.authDriveCapRepository.getDriveCapByDate(parsedDate);
+            if (!driveCap) {
+                return res.status(404).json({ error: 'Esta captura no existe' });
+            }
+            res.json(driveCap);
+        } catch (error) {
+            this.handleError(error, res);
+        }
+    }
+    getDriveCapByLastId = async (req: Request, res: Response) => {
+        try {
+            const driveCap = await this.authDriveCapRepository.getDriveCapByLastId();
+            res.json(driveCap);
+        } catch (error) {
             this.handleError(error, res);
         }
     }

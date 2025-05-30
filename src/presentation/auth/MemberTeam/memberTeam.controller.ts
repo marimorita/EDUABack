@@ -57,4 +57,38 @@ export class AuthMemberTeamController {
             this.handleError(error, res);
         }
     }
+    getAllMemberTeam = async (req: Request, res: Response) => {
+        try {
+            const MemberTeam = await this.authMemberTeamRepository.getAllMemberTeam();
+            res.json(MemberTeam);
+        } catch (error) {
+            console.log(error);
+            this.handleError(error, res);
+        }
+    }
+    getMemberTeamByEmail = async (req: Request, res: Response) => {
+        const token = req.params.token;
+        console.log("Token recibido: ", token);
+
+        if (!token) {
+            return res.status(400).json({ error: 'Token requerido' });
+        }
+        try {
+            const decoded = jwt.verify(token, envs.JWT_SECRET as string) as { user: { email: string, role: string } };
+            console.log("Email decodificado:", decoded.user.email);
+            const memberTeam = await this.authMemberTeamRepository.getMemberTeamByEmail(decoded.user.email);
+            console.log("Miembro del equipo encontrado", memberTeam);
+
+            if (!memberTeam) {
+                return res.status(404).json({ error: 'Miembro del equipo no encontrado' })
+            }
+
+            res.status(200).json(memberTeam)
+        } catch (error) {
+            console.log(error);
+
+            this.handleError(error, res);
+        }
+
+    }
 }

@@ -34,4 +34,31 @@ export class AuthDriveCapDataSourceImpl implements AuthDriveCapDataSource {
             throw CustomError.internalServer();
         }
     }
+
+    async getAllDriveCap(): Promise<DriveCapEntity[]> {
+        try {
+            return await this.DriveCapRepository.find();
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+
+    async getDriveCapByDate(date: Date): Promise<DriveCapEntity | null> {
+        try {
+            return await this.DriveCapRepository.findOne({ where: { date } });
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+    async getDriveCapByLastId(): Promise<DriveCapEntity | null> {
+        try {
+            const result = await this.DriveCapRepository.find({order:{id: 'DESC'}, take: 1});
+            return result[0] || null
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
 }

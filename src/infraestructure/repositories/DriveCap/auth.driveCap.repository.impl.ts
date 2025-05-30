@@ -8,4 +8,13 @@ export class AuthDriveCapRepositoryImpl implements AuthDriveCapRepository {
     register(registerDriveCapDto: RegisterDriveCapDto): Promise<{ message: string }> {
         return this.authDriveCapDataSource.register(registerDriveCapDto);
     }
+    getAllDriveCap(): Promise<DriveCapEntity[]> {
+        return this.authDriveCapDataSource.getAllDriveCap()
+    }
+    getDriveCapByDate(date: Date): Promise<DriveCapEntity | null> {
+        return this.authDriveCapDataSource.getDriveCapByDate(date);
+    }
+    getDriveCapByLastId(): Promise<DriveCapEntity | null> {
+        return this.authDriveCapDataSource.getDriveCapByLastId()
+    }
 }

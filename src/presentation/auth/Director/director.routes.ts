@@ -11,8 +11,10 @@ export class AuthDirectorRoutes {
         const AuthRepository = new AuthDirectorRepositoryImpl(datasource);
         const controller = new AuthDirectorController(AuthRepository);
 
+        router.get('/director', controller.getAllDirector)
         router.post('/login', controller.loginDirector)
         router.post('/register', controller.registerDirector)
+        router.get('/director/:token', controller.getDirectorByEmail)
         return router;
     }
 }  

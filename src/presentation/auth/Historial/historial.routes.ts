@@ -12,6 +12,8 @@ export class AuthHistorialRoutes {
         const controller = new AuthHistorialController(AuthRepository);
 
         router.post('/register', controller.registerHistorial)
+        router.get('/historial', controller.getAllHistorial)
+        router.get('/historial/:id', controller.getHistorialById)
         return router;
     }
 }  

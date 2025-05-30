@@ -42,6 +42,23 @@ export class AuthVisitorDataSourceImpl implements AuthVisitorDataSource {
             throw CustomError.internalServer();
         }
     }
+    async getAllVisitor(): Promise<VisitorEntity[]> {
+        try {
+            return await this.VisitorRepository.find();
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+    async getVisitorByEmail(email: string): Promise<VisitorEntity | null> {
+        try {
+            return await this.VisitorRepository.findOne({ where: { email } });
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+
     async login(loginVisitorDto: LoginVisitorDto): Promise<{ token: string, role: string | undefined, message: string }> {
         const { email, password } = loginVisitorDto
 

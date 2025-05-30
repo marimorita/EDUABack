@@ -12,7 +12,10 @@ export class AuthVisitorRoutes {
         const controller = new AuthVisitorController(AuthRepository);
 
         router.post('/login', controller.loginVisitor)
+        router.get('/visitor', controller.getAllVisitor)
         router.post('/register', controller.registerVisitor)
+        router.get('/visitor/:token', controller.getVisitorByEmail)
+
         return router;
     }
 }  

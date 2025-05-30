@@ -1,12 +1,16 @@
-import { Entity, PrimaryGeneratedColumn , Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 @Entity('Notificaciones')
 export class NotificacionesEntity {
-    @PrimaryGeneratedColumn({name : 'idNotis'})
+    @PrimaryGeneratedColumn({ name: 'idNotis' })
     id?: number;
-    @Column({name : 'titulo'})
+    @Column({ name: 'titulo' })
     tittle?: string;
-    @Column({name : 'texto'})
+    @Column({ name: 'texto' })
     text?: string;
-    @Column({name : 'idDriveCap'})
+    @Column({ name: 'imgCap' })
+    img?: string;
+    @Column({ name: 'idDriveCap' })
     foreignKeyDrive?: number;
+    @Column({ name: 'roleCC' })
+    roleCC?: number;
 }

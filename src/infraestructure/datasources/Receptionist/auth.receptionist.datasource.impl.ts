@@ -44,6 +44,22 @@ export class AuthReceptionistDataSourceImpl implements AuthReceptionistDataSourc
             throw CustomError.internalServer();
         }
     }
+    async getAllReceptionist(): Promise<ReceptionistEntity[]> {
+        try {
+            return await this.receptionistRepository.find();
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+    async getReceptionistByEmail(email: string): Promise<ReceptionistEntity | null> {
+        try {
+            return await this.receptionistRepository.findOne({ where: { email } });
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
     async login(loginReceptionistDto: LoginReceptionistDto): Promise<{ token: string, role: string | undefined, message: string }> {
         const { email, password } = loginReceptionistDto
 
