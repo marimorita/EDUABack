@@ -13,17 +13,19 @@ export class AuthHistorialDataSourceImpl implements AuthHistorialDataSource {
     }
     async register(registerHistorialDto: RegisterHistorialDto): Promise<{ message: string }> {
 
-        const { tittle, text, img, foreignkeyDrive  } = registerHistorialDto;
+        const { tittle, text, img, foreignkeyDrive } = registerHistorialDto;
 
         try {
             const newHistorial = this.HistorialRepository.create({
                 tittle: tittle,
                 text: text,
                 img: img,
-                foreignkeyDrive : foreignkeyDrive ,
+                foreignkeyDrive: foreignkeyDrive,
             });
 
             await this.HistorialRepository.save(newHistorial);
+            
+            console.error("Guardado con éxito:", newHistorial);
             return { message: 'Historial registrado correctamente' };
         } catch (error) {
             console.error("error registering Historial", error);
@@ -32,6 +34,33 @@ export class AuthHistorialDataSourceImpl implements AuthHistorialDataSource {
                 throw error;
             }
             throw CustomError.internalServer();
+        }
+    }
+
+    async getHistorialById(id: number): Promise<HistorialEntity | null> {
+        try {
+            return await this.HistorialRepository.findOne({ where: { id } });
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+
+    async getAllHistorial(): Promise<HistorialEntity[]> {
+        try {
+            return await this.HistorialRepository.find();
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+
+    async getHistroialByLastId(id: number): Promise<HistorialEntity | null> {
+        try {
+            return await this.HistorialRepository.findOne({order:{id: 'DESC'}});
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
         }
     }
 }

@@ -15,7 +15,7 @@ export class AppRoutes {
         const router = Router();
         router.use('/edua-at/auth/visitor', AuthVisitorRoutes.routes)
         router.use('/edua-at/auth/twoverific', VerifyCodeRoutes.routes)
-        router.use('/edua-at/auth/driveCap', AuthDriveCapRoutes.routes)
+        router.use('/edua-at/auth/drivecap', AuthDriveCapRoutes.routes)
         router.use('/edua-at/auth/director', AuthDirectorRoutes.routes)
         router.use('/edua-at/auth/historial', AuthHistorialRoutes.routes)
         router.use('/edua-at/auth/vr', VerifyTokenAndSendCodeRoutes.routes)

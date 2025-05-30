@@ -11,8 +11,10 @@ export class AuthMemberTeamRoutes {
         const AuthRepository = new AuthMemberTeamRepositoryImpl(datasource);
         const controller = new AuthMemberTeamController(AuthRepository);
 
+        router.get('/memberTeam', controller.getAllMemberTeam)
         router.post('/login', controller.loginMemberTeam)
         router.post('/register', controller.registerMemberTeam)
+        router.get('/memberTeam/:token', controller.getMemberTeamByEmail)
         return router;
     }
 }  

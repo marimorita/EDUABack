@@ -42,6 +42,23 @@ export class AuthDirectorDataSourceImpl implements AuthDirectorDataSource {
             throw CustomError.internalServer();
         }
     }
+
+    async getDirectorByEmail(email: string): Promise<DirectorEntity | null> {
+        try {
+            return await this.DirectorRepository.findOne({ where: { email } });
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+    async getAllDirector(): Promise<DirectorEntity[]> {
+        try {
+            return await this.DirectorRepository.find();
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
     async login(loginDirectorDto: LoginDirectorDto): Promise<{ token: string, role: string | undefined, message: string }> {
         const { email, password } = loginDirectorDto
 

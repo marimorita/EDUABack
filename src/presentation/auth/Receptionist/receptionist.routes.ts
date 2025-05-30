@@ -11,8 +11,10 @@ export class AuthReceptionistRoutes {
         const AuthRepository = new AuthReceptionistRepositoryImpl(datasource);
         const controller = new AuthReceptionistController(AuthRepository);
 
+        router.get('/receptionist', controller.getAllReceptionist)
         router.post('/login', controller.loginReceptionist)
         router.post('/register', controller.registerReceptionist)
+        router.get('/receptionist/:token', controller.getReceptionistByEmail)
         return router;
     }
 }  

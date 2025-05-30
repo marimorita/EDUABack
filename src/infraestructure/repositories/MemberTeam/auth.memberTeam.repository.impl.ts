@@ -11,4 +11,10 @@ export class AuthMemberTeamRepositoryImpl implements AuthMemberTeamRepository {
     login(loginMemberTeamDto: { email: string, password: string }): Promise<{ token: string, role: string | undefined, message: string }> {
         return this.authMemberTeamDataSource.login(loginMemberTeamDto);
     }
+    getAllMemberTeam(): Promise<MemberTeamEntity[]> {
+        return this.authMemberTeamDataSource.getAllMemberTeam();
+    }
+    getMemberTeamByEmail(email: string): Promise<MemberTeamEntity | null> {
+        return this.authMemberTeamDataSource.getMemberTeamByEmail(email)
+    }
 }

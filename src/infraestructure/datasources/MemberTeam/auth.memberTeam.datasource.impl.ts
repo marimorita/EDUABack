@@ -42,6 +42,22 @@ export class AuthMemberTeamDataSourceImpl implements AuthMemberTeamDataSource {
             throw CustomError.internalServer();
         }
     }
+    async getAllMemberTeam(): Promise<MemberTeamEntity[]> {
+        try {
+            return await this.MemberTeamRepository.find();
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
+    async getMemberTeamByEmail(email : string): Promise<MemberTeamEntity | null> {
+        try {
+            return await this.MemberTeamRepository.findOne({where: {email}});
+        } catch (error) {
+            console.error('Error fetching client by id:', error);
+            throw CustomError.internalServer()
+        }
+    }
     async login(loginMemberTeamDto: LoginMemberTeamDto): Promise<{ token: string, role: string | undefined, message: string }> {
         const { email, password } = loginMemberTeamDto
 

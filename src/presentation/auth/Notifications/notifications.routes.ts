@@ -12,7 +12,11 @@ export class AuthNotificationsRoutes {
         const AuthRepository = new AuthNotificationsRepositoryImpl(datasource);
         const controller = new AuthNotificationsController(AuthRepository);
 
+        router.get('/notifications', controller.getAllNotifications)
+        router.get('/notifications/:id', controller.getNotificationsById)
         router.post('/register', controller.registerNotifications)
+        router.post('/update/roleCC', controller.updateRoleCCNotification)
+
         return router;
     }
 }  

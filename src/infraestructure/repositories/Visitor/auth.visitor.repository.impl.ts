@@ -12,4 +12,10 @@ export class AuthVisitorRepositoryImpl implements AuthVisitorRepository {
     login(loginVisitorDto: { email: string, password: string }): Promise<{ token: string, role: string | undefined, message: string }> {
         return this.authVisitorDataSource.login(loginVisitorDto);
     }
+    getAllVisitor(): Promise<VisitorEntity[]> {
+        return this.authVisitorDataSource.getAllVisitor();
+    }
+    getVisitorByEmail(email: string): Promise<VisitorEntity | null> {
+        return this.authVisitorDataSource.getVisitorByEmail(email)
+    }
 }

@@ -57,4 +57,39 @@ export class AuthDirectorController {
             this.handleError(error, res);
         }
     }
+        getAllDirector = async (req: Request, res: Response) => {
+        try {
+            const Director = await this.authDirectorRepository.getAllDirector();
+            res.json(Director);
+        } catch (error) {
+            console.log(error);
+            this.handleError(error, res);
+        }
+    }
+    getDirectorByEmail = async (req: Request, res: Response) => {
+        const token = req.params.token;
+        console.log("Token recibido: ", token);
+
+        if (!token) {
+            return res.status(400).json({ error: 'Token requerido' });
+        }
+        try {
+            const decoded = jwt.verify(token, envs.JWT_SECRET as string) as { user: { email: string, role: string } };
+            console.log("Email decodificado:", decoded.user.email);
+            const director = await this.authDirectorRepository.getDirectorByEmail(decoded.user.email);
+            console.log("Director encontrado", director);
+
+            if (!director) {
+                return res.status(404).json({ error: 'Director no encontrado' })
+            }
+
+            res.status(200).json(director)
+        } catch (error) {
+            console.log(error);
+
+            this.handleError(error, res);
+        }
+
+    }
+
 }

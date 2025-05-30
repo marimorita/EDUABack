@@ -57,4 +57,39 @@ export class AuthReceptionistController {
             this.handleError(error, res);
         }
     }
+    getAllReceptionist = async (req: Request, res: Response) => {
+        try {
+            const Receptionist = await this.authReceptionistRepository.getAllReceptionist();
+            res.json(Receptionist);
+        } catch (error) {
+            console.log(error);
+            this.handleError(error, res);
+        }
+    }
+    getReceptionistByEmail = async (req: Request, res: Response) => {
+        const token = req.params.token;
+        console.log("Token recibido: ", token);
+
+        if (!token) {
+            return res.status(400).json({ error: 'Token requerido' });
+        }
+        try {
+            const decoded = jwt.verify(token, envs.JWT_SECRET as string) as { user: { email: string, role: string } };
+            console.log("Email decodificado:", decoded.user.email);
+            const receptionist = await this.authReceptionistRepository.getReceptionistByEmail(decoded.user.email);
+            console.log("Recepcionista encontrado", receptionist);
+
+            if (!receptionist) {
+                return res.status(404).json({ error: 'Recepcionista no encontrado' })
+            }
+
+            res.status(200).json(receptionist)
+        } catch (error) {
+            console.log(error);
+
+            this.handleError(error, res);
+        }
+
+    }
+
 }

@@ -57,4 +57,39 @@ export class AuthVisitorController {
             this.handleError(error, res);
         }
     }
+    getAllVisitor = async (req: Request, res: Response) => {
+        try {
+            const Visitor = await this.authVisitorRepository.getAllVisitor();
+            res.json(Visitor);
+        } catch (error) {
+            console.log(error);
+            this.handleError(error, res);
+        }
+    }
+    getVisitorByEmail = async (req: Request, res: Response) => {
+        const token = req.params.token;
+        console.log("Token recibido: ", token);
+
+        if (!token) {
+            return res.status(400).json({ error: 'Token requerido' });
+        }
+        try {
+            const decoded = jwt.verify(token, envs.JWT_SECRET as string) as { user: { email: string, role: string } };
+            console.log("Email decodificado:", decoded.user.email);
+            const visitor = await this.authVisitorRepository.getVisitorByEmail(decoded.user.email);
+            console.log("Visitante encontrado", visitor);
+
+            if (!visitor) {
+                return res.status(404).json({ error: 'Visitante no encontrado' })
+            }
+
+            res.status(200).json(visitor)
+        } catch (error) {
+            console.log(error);
+
+            this.handleError(error, res);
+        }
+
+    }
+
 }
