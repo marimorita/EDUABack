@@ -50,8 +50,8 @@ export class AuthReceptionistController {
         const routeCode = generateVerificationCode();
 
         try {
-            const { token, role, message } = await this.authReceptionistRepository.login(loginReceptionistDto!);
-            res.json({ token, role, routeCode, message });
+            const { token, role, message, name } = await this.authReceptionistRepository.login(loginReceptionistDto!);
+            res.json({ token, role, routeCode, message, name });
         } catch (error) {
             console.error("error h", error);
             this.handleError(error, res);

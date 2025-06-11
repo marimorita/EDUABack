@@ -59,7 +59,7 @@ export class AuthDirectorDataSourceImpl implements AuthDirectorDataSource {
             throw CustomError.internalServer()
         }
     }
-    async login(loginDirectorDto: LoginDirectorDto): Promise<{ token: string, role: string | undefined, message: string }> {
+    async login(loginDirectorDto: LoginDirectorDto): Promise<{ token: string, role: string | undefined,  name: string | undefined, message: string }> {
         const { email, password } = loginDirectorDto
 
         try {
@@ -76,7 +76,8 @@ export class AuthDirectorDataSourceImpl implements AuthDirectorDataSource {
             return {
                 token,
                 role: Director.role,
-                message: "Inicio de sesión exitoso"
+                message: "Inicio de sesión exitoso",
+                name: Director.name ?? '',
             };
         } catch (error) {
             console.error("Error registering client: ", error);

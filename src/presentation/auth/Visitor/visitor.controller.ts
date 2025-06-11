@@ -50,8 +50,8 @@ export class AuthVisitorController {
         const routeCode = generateVerificationCode();
 
         try {
-            const { token, role, message } = await this.authVisitorRepository.login(loginVisitorDto!);
-            res.json({ token, role, routeCode, message });
+            const { token, role, message, name } = await this.authVisitorRepository.login(loginVisitorDto!);
+            res.json({ token, role, routeCode, message, name });
         } catch (error) {
             console.error("error h", error);
             this.handleError(error, res);

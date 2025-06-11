@@ -50,8 +50,8 @@ export class AuthDirectorController {
         const routeCode = generateVerificationCode();
 
         try {
-            const { token, role, message } = await this.authDirectorRepository.login(loginDirectorDto!);
-            res.json({ token, role, routeCode, message });
+            const { token, role, name , message} = await this.authDirectorRepository.login(loginDirectorDto!);
+            res.json({ token, role, routeCode, name, message });
         } catch (error) {
             console.error("error h", error);
             this.handleError(error, res);

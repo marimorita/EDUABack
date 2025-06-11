@@ -3,7 +3,6 @@ import { envs } from "../../../config/envs";
 import { Repository } from "typeorm";
 import { BcryptAdapter } from "../../../config";
 import { AppDataSource } from "../../../Data/MySQL/OrmConfig"
-import { ReceptionistMapper } from "../../mappers/Receptionist/receptionist.mapper";
 import { ReceptionistEntity } from "../../../Data";
 import { AuthReceptionistDataSource, CustomError, LoginReceptionistDto, RegisterReceptionistDto } from "../../../domain";
 
@@ -60,7 +59,7 @@ export class AuthReceptionistDataSourceImpl implements AuthReceptionistDataSourc
             throw CustomError.internalServer()
         }
     }
-    async login(loginReceptionistDto: LoginReceptionistDto): Promise<{ token: string, role: string | undefined, message: string }> {
+    async login(loginReceptionistDto: LoginReceptionistDto): Promise<{ token: string, role: string | undefined, name: string | undefined,  message: string }> {
         const { email, password } = loginReceptionistDto
 
         try {
@@ -77,7 +76,8 @@ export class AuthReceptionistDataSourceImpl implements AuthReceptionistDataSourc
             return {
                 token,
                 role: receptionist.role,
-                message: "Inicio de sesión exitoso"
+                message: "Inicio de sesión exitoso",
+                name: receptionist.name ?? '', 
             };
         } catch (error) {
             console.error("Error registering client: ", error);

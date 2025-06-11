@@ -50,15 +50,15 @@ export class AuthMemberTeamDataSourceImpl implements AuthMemberTeamDataSource {
             throw CustomError.internalServer()
         }
     }
-    async getMemberTeamByEmail(email : string): Promise<MemberTeamEntity | null> {
+    async getMemberTeamByEmail(email: string): Promise<MemberTeamEntity | null> {
         try {
-            return await this.MemberTeamRepository.findOne({where: {email}});
+            return await this.MemberTeamRepository.findOne({ where: { email } });
         } catch (error) {
             console.error('Error fetching client by id:', error);
             throw CustomError.internalServer()
         }
     }
-    async login(loginMemberTeamDto: LoginMemberTeamDto): Promise<{ token: string, role: string | undefined, message: string }> {
+    async login(loginMemberTeamDto: LoginMemberTeamDto): Promise<{ token: string, role: string | undefined, name: string | undefined, message: string }> {
         const { email, password } = loginMemberTeamDto
 
         try {
@@ -75,7 +75,8 @@ export class AuthMemberTeamDataSourceImpl implements AuthMemberTeamDataSource {
             return {
                 token,
                 role: MemberTeam.role,
-                message: "Inicio de sesión exitoso"
+                message: "Inicio de sesión exitoso",
+                name: MemberTeam.name ?? '',
             };
         } catch (error) {
             console.error("Error registering client: ", error);

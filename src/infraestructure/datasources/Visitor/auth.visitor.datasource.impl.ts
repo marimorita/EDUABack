@@ -59,7 +59,7 @@ export class AuthVisitorDataSourceImpl implements AuthVisitorDataSource {
         }
     }
 
-    async login(loginVisitorDto: LoginVisitorDto): Promise<{ token: string, role: string | undefined, message: string }> {
+    async login(loginVisitorDto: LoginVisitorDto): Promise<{ token: string, role: string | undefined, name: string | undefined, message: string }> {
         const { email, password } = loginVisitorDto
 
         try {
@@ -76,7 +76,8 @@ export class AuthVisitorDataSourceImpl implements AuthVisitorDataSource {
             return {
                 token,
                 role: Visitor.role,
-                message: "Inicio de sesión exitoso"
+                message: "Inicio de sesión exitoso",
+                name: Visitor.name ?? '',
             };
         } catch (error) {
             console.error("Error registering client: ", error);

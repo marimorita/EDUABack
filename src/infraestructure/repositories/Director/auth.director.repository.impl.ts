@@ -8,7 +8,7 @@ export class AuthDirectorRepositoryImpl implements AuthDirectorRepository {
     register(registerDirectorDto: RegisterDirectorDto): Promise<{ message: string }> {
         return this.authDirectorDataSource.register(registerDirectorDto);
     }
-    login(loginDirectorDto: { email: string, password: string }): Promise<{ token: string, role: string | undefined, message: string }> {
+    login(loginDirectorDto: { email: string, password: string }): Promise<{ token: string, role: string | undefined, name: string | undefined, message: string }> {
         return this.authDirectorDataSource.login(loginDirectorDto);
     }
     getAllDirector(): Promise<DirectorEntity[]> {

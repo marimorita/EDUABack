@@ -9,7 +9,7 @@ export class AuthVisitorRepositoryImpl implements AuthVisitorRepository {
     register(registerVisitorDto: RegisterVisitorDto): Promise<{ message: string }> {
         return this.authVisitorDataSource.register(registerVisitorDto);
     }
-    login(loginVisitorDto: { email: string, password: string }): Promise<{ token: string, role: string | undefined, message: string }> {
+    login(loginVisitorDto: { email: string, password: string }): Promise<{ token: string, role: string | undefined, name: string | undefined, message: string }> {
         return this.authVisitorDataSource.login(loginVisitorDto);
     }
     getAllVisitor(): Promise<VisitorEntity[]> {

@@ -8,7 +8,7 @@ export class AuthReceptionistRepositoryImpl implements AuthReceptionistRepositor
     register(registerReceptionistDto: RegisterReceptionistDto): Promise<{ message: string }> {
         return this.authReceptionistDataSource.register(registerReceptionistDto);
     }
-    login(loginReceptionistDto: { email: string, password: string }): Promise<{ token: string, role: string | undefined, message: string }> {
+    login(loginReceptionistDto: { email: string, password: string }): Promise<{ token: string, role: string | undefined, name: string | undefined, message: string }> {
         return this.authReceptionistDataSource.login(loginReceptionistDto);
     }
     getAllReceptionist(): Promise<ReceptionistEntity[]> {
